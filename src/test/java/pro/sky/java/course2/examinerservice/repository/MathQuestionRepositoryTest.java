@@ -31,7 +31,11 @@ public class MathQuestionRepositoryTest {
     public void getAllTest() {
         HashSet<Question> expected = new HashSet<>(Set.of(initQuestions));
         Collection<Question> result = questionRepository.getAll();
-        Assertions.assertEquals(expected, result);
+        Assertions.assertTrue(
+                expected.size()== result.size()
+                        && expected.containsAll(result)
+                        && result.containsAll(expected)
+        );
     }
 
     @Test
@@ -43,7 +47,13 @@ public class MathQuestionRepositoryTest {
         HashSet<Question> expectedAll = new HashSet<>(Set.of(initQuestions));
         expectedAll.add(newQuestion);
         Collection<Question> resultAll = questionRepository.getAll();
-        Assertions.assertEquals(expectedAll, resultAll);
+        Assertions.assertTrue(
+                expectedAll.size()== resultAll.size()
+                        && expectedAll.contains(newQuestion)
+                        && expectedAll.size() == initQuestions.length + 1
+                        && expectedAll.containsAll(resultAll)
+                        && resultAll.containsAll(expectedAll)
+        );
     }
 
     @Test
@@ -56,7 +66,11 @@ public class MathQuestionRepositoryTest {
 
         HashSet<Question> expectedAll = new HashSet<>(Set.of(initQuestions));
         Collection<Question> resultAll = questionRepository.getAll();
-        Assertions.assertEquals(expectedAll, resultAll);
+        Assertions.assertTrue(
+                expectedAll.size()== resultAll.size()
+                        && expectedAll.containsAll(resultAll)
+                        && resultAll.containsAll(expectedAll)
+        );
     }
 
     @Test

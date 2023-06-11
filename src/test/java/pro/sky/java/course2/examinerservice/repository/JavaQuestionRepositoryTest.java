@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import pro.sky.java.course2.examinerservice.Question;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,9 +30,13 @@ public class JavaQuestionRepositoryTest {
     }
     @Test
     public void getAllTest() {
-        HashSet<Question> expected = new HashSet<>(Set.of(initQuestions));
+        Collection<Question> expected = Collections.unmodifiableCollection(Set.of(initQuestions));
         Collection<Question> result = questionRepository.getAll();
-        Assertions.assertEquals(expected, result);
+        Assertions.assertTrue(
+                expected.size()== result.size()
+                && expected.containsAll(result)
+                && result.containsAll(expected)
+        );
     }
 
     @Test
@@ -43,7 +48,13 @@ public class JavaQuestionRepositoryTest {
         HashSet<Question> expectedAll = new HashSet<>(Set.of(initQuestions));
         expectedAll.add(newQuestion);
         Collection<Question> resultAll = questionRepository.getAll();
-        Assertions.assertEquals(expectedAll, resultAll);
+        Assertions.assertTrue(
+                expectedAll.size()== resultAll.size()
+                        && expectedAll.contains(newQuestion)
+                        && expectedAll.size() == initQuestions.length + 1
+                        && expectedAll.containsAll(resultAll)
+                        && resultAll.containsAll(expectedAll)
+        );
     }
 
     @Test
@@ -56,7 +67,11 @@ public class JavaQuestionRepositoryTest {
 
         HashSet<Question> expectedAll = new HashSet<>(Set.of(initQuestions));
         Collection<Question> resultAll = questionRepository.getAll();
-        Assertions.assertEquals(expectedAll, resultAll);
+        Assertions.assertTrue(
+                expectedAll.size()== resultAll.size()
+                        && expectedAll.containsAll(resultAll)
+                        && resultAll.containsAll(expectedAll)
+        );
     }
 
     @Test
