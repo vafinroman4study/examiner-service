@@ -18,12 +18,14 @@ public class Question {
         return question;
     }
 
-    public boolean equals(Question q) {
-        return question.equals(q.getQuestion()) && answer.equals(q.getAnswer());
+    @Override
+    public boolean equals(Object q) {
+        if (q == null || getClass() != q.getClass()) return false;
+        return hashCode() == q.hashCode(); // question.equals(q.getQuestion()) && answer.equals(q.getAnswer());
     }
 
     public String toString() {
-        return question + " " + answer;
+        return question + "? " + answer;
     }
 
     public int hashCode() {
