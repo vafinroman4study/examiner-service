@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Repository
 public class MathQuestionRepository implements QuestionRepository {
-    private Set<Question> questions;
+    private Set<Question> questions = new HashSet<>();
 
     @PostConstruct
     public void init() {
